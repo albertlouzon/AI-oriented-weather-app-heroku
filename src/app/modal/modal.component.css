@@ -1,0 +1,16 @@
+span {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.entityTitle {
+    color:#3F51B5;;
+}
+.entityCount {
+    color:#8E24AA;
+    margin-left: 15px;
+    font-size: 12px;
+}
+.wordTitle {
+    color:#8E24AA;
+    padding-right: 15px
+}

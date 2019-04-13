@@ -1,3 +1,96 @@
-<h1>
-  {{title}}
-</h1>
+<div>
+  <div [className]="dynamicBg">
+      <h1  *ngIf='!showDetails && !loader' style="text-align: center; margin-top: 10vh; color:#8E24AA;">Meteos 2.0: Get the weather of anything</h1>
+      <div *ngIf='!showDetails && !loader' class='welcomeInput'>
+      <mat-form-field class="full-width">
+          <input type='text' class='mainInput' matInput (keyup)="onChange($event.target.value)" placeholder="Write a word in english">
+        </mat-form-field>
+        <button mat-button (click)="onSelectCountry()">Lets go</button>
+  
+      </div>
+    <div class=topInputContainer *ngIf='loader || showDetails' >
+        <mat-form-field >
+        <input type='text' class='mainInput' matInput (keyup)="onChange($event.target.value)" placeholder="Another try ?">
+      </mat-form-field>
+      <button mat-button (click)="onSelectCountry()">Lets go</button>
+    </div>
+  
+      <mat-grid-list cols="4" rowHeight="100px">
+        <!-- <main> -->
+          <div *ngIf='showDetails'>
+            
+            <mat-grid-tile
+              [colspan]="tiles[1].cols"
+              [rowspan]="tiles[1].rows">
+              <div class="globalScoreContainer">
+                  <h3 class='mainDescription'>{{convertScoreToDescription(convertScoreToIcon(finalDetail.score))}}</h3>
+      
+                    <mat-icon  class='weatherIcon'>{{convertScoreToIcon(finalDetail.score)}}</mat-icon>
+                  <!-- <span >Score : {{finalDetail.score}}</span> -->
+              </div>
+              
+            
+          </mat-grid-tile>
+  
+          <mat-grid-tile
+          class="acrylic shadow"
+          [colspan]="tiles[3].cols"
+          [rowspan]="tiles[3].rows"
+          >
+          <h4 style="margin-right:15px; color:#8E24AA">Click on the filters</h4>
+          <mat-chip-list>
+              <!-- <mat-chip color="primary" selected>Primary fish</mat-chip> -->
+              <mat-chip [color]="assignColorToEntity(entity)" (click)="onClickingEntity(entity)"  *ngFor="let entity of entitiesKeys" selected>{{entity}}</mat-chip>
+            </mat-chip-list>
+        </mat-grid-tile>
+  
+          <mat-grid-tile
+          class="acrylic shadow"
+          [colspan]="tiles[2].cols"
+          [rowspan]="tiles[2].rows"
+          >
+          <mat-accordion>
+              <!-- <mat-expansion-panel class="allArticlesPanel" >
+                  <mat-expansion-panel-header>
+                  <mat-panel-title>
+                     See 7 first articles 
+                  </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <ul *ngFor="let url of finalDetail.listOfAllUrls">
+                      <li ><a class="yellow" [href]="url">{{url}}</a></li>
+                  </ul>
+        </mat-expansion-panel> -->
+          <h4  style="color:#8E24AA">{{finalDetail.mainCategories.length}} CATEGORIES</h4>
+          <mat-expansion-panel *ngFor="let category of finalDetail.mainCategories">
+                <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <span>{{category.label}} </span> 
+                </mat-panel-title>
+                <mat-panel-description>
+                  <!-- Reliability: {{category.score}} -->
+                  <mat-icon style="margin-left:15px">{{convertScoreToIcon(category.globalCatScore)}}</mat-icon>
+                </mat-panel-description>
+                </mat-expansion-panel-header>
+                <ul *ngFor="let article of category.listOfUrls">
+                    <li>    <a target="_blank" rel="noopener noreferrer" [href]="article.url"><span class='catTitle'>{{article.title}}</span></a> 
+                      <mat-icon>{{convertScoreToIcon(article.score)}}</mat-icon>
+            
+                    </li>
+                </ul>
+      </mat-expansion-panel>
+      </mat-accordion>
+      
+      </mat-grid-tile>
+         
+  
+      
+          </div>
+        <!-- </main> -->
+        </mat-grid-list>
+        <div *ngIf='loader' class='spinnerCont'>
+            <mat-spinner class="loadSpinner" ></mat-spinner>
+            <span>{{dynamicStatus}}</span>
+        </div>
+      
+  </div>
+  </div>

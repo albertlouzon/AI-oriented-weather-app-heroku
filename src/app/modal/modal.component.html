@@ -1,0 +1,28 @@
+<mat-nav-list>
+    <mat-accordion>
+        <mat-expansion-panel  mat-list-item *ngFor="let words of entity" class="allArticlesPanel" >
+            <mat-expansion-panel-header>
+            <mat-panel-title class='entityTitle'>
+               {{words.title}}
+            </mat-panel-title>
+            <mat-panel-description>
+                <!-- Reliability: {{category.score}} -->
+                <span  class='entityCount' >Number of links: {{words.count}}</span>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <li *ngFor="let article of words.article" mat-line>
+               <a target="_blank" rel="noopener noreferrer"  [href]="article.url" class="wordTitle">{{article.title}}
+                </a>
+              <mat-icon>{{convertScoreToIcon(article.score)}}</mat-icon>
+
+              </li>
+      </mat-expansion-panel>
+      </mat-accordion>
+<!--       
+  <a *ngFor="let words in entity" href="https://keep.google.com/" mat-list-item (click)="openLink($event)">
+    <span mat-line>Google Keep</span>
+    <span mat-line>Add to a note</span>
+  </a> -->
+</mat-nav-list>
+
+

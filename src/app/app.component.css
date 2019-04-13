@@ -1,0 +1,115 @@
+.globalScoreContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: column nowrap;
+        align-items: center;
+}
+
+.topInputContainer {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+.mainInput{
+    font-size: 18px;
+    color:#3F51B5;
+}
+.welcomeInput {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    position: absolute;
+    top: 40%
+}
+.weatherIcon{
+    font-size: 90px;
+    margin-left: -4vw;
+    margin-bottom: 20px;
+}
+.mainDescription {
+    font-family: 'Ubuntu' !important;
+    font-size: 20px;
+    color:#3949AB;
+}
+
+.catTitle {
+    color:#8E24AA;
+    padding-right: 25px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.allArticlesPanel{
+   margin-bottom: 3vh; 
+    background-color:#3F51B5;
+}
+.spinnerCont{
+    position: absolute;
+    top: 40%;
+    left: 35%;
+    display: flex;
+    justify-content: space-between;
+    flex-flow: column nowrap;
+    color:#3949AB;
+    font-size: 24px;
+}
+.loadSpinner{
+    margin-bottom: 15px;
+    margin-left: 35%
+}
+
+.full-width{
+    width: 80vw;
+}
+.topInput {
+z-index: 100;
+position: fixed;
+top:0;
+left: 0;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.star , .star-bg{
+    background-color:#FFC107;
+    background-image: linear-gradient(#F2994A, #F2C94C);
+
+
+}
+.wb_sunny, .wb_sunny-bg {
+    background-image: linear-gradient(#fceabb, #f8b500);
+
+}
+.wb_iridescent, .wb_iridescent-bg {
+    background-image: linear-gradient(#CAC531, #F3F9A7);
+}
+.filter_drama, .filter_drama-bg {
+    background-image: linear-gradient(#abbaab, #ffffff);
+}
+.pool, .pool-bg {
+    background-image: linear-gradient(#86A8E7, #91EAE4);
+
+}
+.ac_unit, .ac_unit-bg {
+    background-image: linear-gradient(#556270, #FF6B6B);
+
+}
+
+
+
+.star-bg, .wb_sunny-bg, .wb_iridescent-bg, .filter_drama-bg, .ac_unit-bg, .default{
+    z-index: -500;
+    display: flex;
+    justify-content: space-between;
+    flex-flow: column nowrap;
+  }
+
+  .default{
+    background-image: linear-gradient(#EFEFBB, #D4D3DD);
+    height: 100vh;
+  }
+
+  
