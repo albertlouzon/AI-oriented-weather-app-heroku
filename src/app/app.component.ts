@@ -147,7 +147,7 @@ filterEntities(){
     }, 10000);
     this.http.post('https://emotional-weather-server.herokuapp.com/'+this.userInput ,null
     ).subscribe((res) => {
-      console.log('AU CALME', res)
+      console.log('AU CALME', res)  
       this.finalDetail = res
       this.filterEntities()
       this.changeGlobalScoreColor(this.finalDetail['score'])
@@ -162,5 +162,5 @@ filterEntities(){
       this.loader = false
     })
   }
-  title = 'meteos-angular';
+  title = 'albert-louzon-meteos';
 }

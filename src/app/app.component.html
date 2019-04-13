@@ -1,6 +1,6 @@
 <div>
   <div [className]="dynamicBg">
-      <h1  *ngIf='!showDetails && !loader' style="text-align: center; margin-top: 10vh; color:#8E24AA;">Meteos 2.0: Get the weather of anything</h1>
+      <h1  *ngIf='!showDetails && !loader' style="text-align: center; margin-top: 10vh; color:#8E24AA;">SMART WEATHER: Get the weather of anything</h1>
       <div *ngIf='!showDetails && !loader' class='welcomeInput'>
       <mat-form-field class="full-width">
           <input type='text' class='mainInput' matInput (keyup)="onChange($event.target.value)" placeholder="Write a word in english">
@@ -94,3 +94,5 @@
       
   </div>
   </div>
+
+  <span>the articles are fetched by google news api and ibm-nlu</span>
