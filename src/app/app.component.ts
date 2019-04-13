@@ -143,7 +143,7 @@ filterEntities(){
     // console.log('sending link to server from config json...',c['sources'][this.fetchAttempts]['feedlink'])
 // console.log('selected keyword :', this.userInput)
     setTimeout(() => {
-      this.dynamicStatus = "The request in abnormally long. Something is wrong. Try another word bro"
+      this.dynamicStatus = "Damn its long! If its not your first request, then I didnt find articles :("
     }, 10000);
     this.http.post('https://emotional-weather-server.herokuapp.com/'+this.userInput ,null
     ).subscribe((res) => {
