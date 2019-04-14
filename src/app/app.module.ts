@@ -15,6 +15,7 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatListModule} from '@angular/material/list';
 import { AppComponent } from './app.component';
 import { ModalComponent } from './modal/modal.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ModalComponent } from './modal/modal.component';
     MatProgressSpinnerModule,
     MatInputModule,
     MatButtonModule,
+    MatBadgeModule,
     MatChipsModule,
     MatBottomSheetModule,
     MatListModule

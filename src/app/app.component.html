@@ -19,10 +19,12 @@
     </div>
     <div *ngIf="showDetails" class="middle">
       <div class="left shadow acrylic">
-          <mat-chip-list class='mat-chip-list-stacked'>
-              <!-- <mat-chip color="primary" selected>Primary fish</mat-chip> -->
-              <mat-chip [color]="assignColorToEntity(entity)" (click)="onClickingEntity(entity)"  *ngFor="let entity of entitiesKeys" selected>{{entity}}</mat-chip>
-            </mat-chip-list>
+          <button mat-raised-button 
+          [matBadge]="finalDetail['entities'][entity].length" matBadgePosition="before" [matBadgeColor]="REVERSEassignColorToEntity(entity)" class='entityBtn'
+          [color]="assignColorToEntity(entity)" (click)="onClickingEntity(entity)"  *ngFor="let entity of entitiesKeys" 
+          >
+        {{entity}}
+      </button>
       </div>
       <div class="center">
             <div class='globalScore shadow acrylic'>
@@ -35,15 +37,16 @@
               </div>
               <div class='mainDescription'>{{convertScoreToDescription(convertScoreToIcon(finalDetail.score))}}</div>
             </div>
-        <!-- <h4 style="margin-right:15px; color:#8E24AA">Click on the filters</h4> -->
             <div class='epicContainer shadow acrylic'>
-                <!-- <h3 mat-subheader>Hottest</h3> -->
                   <div class='hotContainer'>
                      <ul class='ulEpic'>
                         <li class="liEpic" *ngFor="let article of epicArticles.max">
-                            <img  class="imgEpic" [src]="convertScoreToImage(article.sentiment.document.score)" >
+                            <img  class="imgEpic" [src]="article.urlToImage || convertScoreToImage(article.sentiment.document.score)" >
                             <!-- <mat-icon class="imgEpic"  mat-list-icon>{{convertScoreToIcon(article.sentiment.document.score)}}</mat-icon> -->
-                            <span class='subTemp' [style.color]="convertTemperatureToColor(article.sentiment.document.score)"> {{convertScoreToTemperature(article.sentiment.document.score)}}</span>
+                            <span class='subTemp' [style.color]="convertTemperatureToColor(article.sentiment.document.score)"> 
+                              {{convertScoreToTemperature(article.sentiment.document.score)}}
+                              <img  class="littleImage" [src]="convertScoreToImage(article.sentiment.document.score)" >
+                            </span>
                             <h3  class="hEpic">                         
                                <p><a target="_blank" rel="noopener noreferrer" [href]="article.retrieved_url"> <span>{{article.title}} </span> </a>
                             </h3>
@@ -52,13 +55,15 @@
 
                      
                   </div>
-          <!-- <h3 mat-subheader>Frozen</h3> -->
                   <div class='coldContainer'>
                       <ul class='ulEpic'>
                           <li class="liEpic" *ngFor="let article of epicArticles.min">
-                              <img  class="imgEpic" [src]="convertScoreToImage(article.sentiment.document.score)" >
+                              <img  class="imgEpic" [src]="article.urlToImage || convertScoreToImage(article.sentiment.document.score)" >
                               <!-- <mat-icon class="imgEpic"  mat-list-icon>{{convertScoreToIcon(article.sentiment.document.score)}}</mat-icon> -->
-                              <span class='subTemp' [style.color]="convertTemperatureToColor(article.sentiment.document.score)"> {{convertScoreToTemperature(article.sentiment.document.score)}}</span>
+                              <span class='subTemp' [style.color]="convertTemperatureToColor(article.sentiment.document.score)">
+                                 {{convertScoreToTemperature(article.sentiment.document.score)}}
+                                 <img  class="littleImage" [src]="convertScoreToImage(article.sentiment.document.score)" >
+                                </span>
                               <h3  class="hEpic">                         
                                  <p><a target="_blank" rel="noopener noreferrer" [href]="article.retrieved_url"> <span>{{article.title}} </span> </a>
                               </h3>
@@ -70,7 +75,7 @@
       </div>
       <div class="right categoriesContainer"></div>
     </div>
-    <div class="bottom">the articles are provided by google news api</div>
+    <!-- <div class="bottom">the articles are provided by google news api</div> -->
   </div>
   <div *ngIf='loader' class='spinnerCont'>
       <mat-spinner class="loadSpinner" ></mat-spinner>

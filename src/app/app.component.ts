@@ -154,11 +154,18 @@ export class AppComponent {
       return 'primary'
     }
   }
+  REVERSEassignColorToEntity(entity) {
+    if (this.finalDetail['entities'][entity].length > 3) {
+      return 'primary'
+    } else {
+      return 'accent'
+    }
+  }
 
   convertTemperatureToColor(score: number){
     const temperature = Math.floor((score * 50) + toleranceFactor);
     if(temperature > 10) {
-      return '#9E9D24'
+      return '#4CAF50'
 
     } else if(temperature > -15) {
       return '#F9A825'
@@ -196,7 +203,6 @@ export class AppComponent {
     this.entitiesValues = Object.keys(this.finalDetail['entities']).map(key => this.finalDetail['entities'][key]);
     this.entitiesKeys = Object.keys(this.finalDetail['entities'])
   }
-
   filterExtremes() {
     const filteredMin = []
     const filteredMax = []
@@ -223,6 +229,7 @@ export class AppComponent {
         filteredMax.push(full_article)
       }
       })
+        console.log('love, ', {max:filteredMax, min:filteredMin})
     return {max:filteredMax, min:filteredMin}
   }
 

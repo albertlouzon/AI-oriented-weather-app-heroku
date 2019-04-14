@@ -134,17 +134,17 @@ body {
 }
 
 .top{
-    height: 10%;
+    height: 5%;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .left {
     width: 25%;
     display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
+    flex-flow: column nowrap;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -154,7 +154,7 @@ body {
 } */
 
 .epicContainer {
-    height: 60%;
+    height: 65%;
     display: flex;
     justify-content: center;
     flex-flow: row nowrap;
@@ -181,14 +181,14 @@ mat-chip {
     font-size: 14px;
 }
 .globalScore {
-    height: 40%;
+    height: 30%;
     display: flex;
     flex-flow: column wrap;
     justify-content: space-between;
 }
 
 .weatherContainer {
-    height: 40%;
+    /* height: 40%; */
     width: 100%;
     display: flex;
     flex-flow: row nowrap;
@@ -207,9 +207,12 @@ mat-chip {
     height: 18vh;
     width: 18vh
 }
+a { color: inherit; } 
+
 .mainDescription {
     font: bold 15px/1.7 'Ubuntu' !important;
     color:#3949AB;
+    text-align: center;
     /* overflow: hidden; */
 }
   
@@ -234,11 +237,10 @@ mat-chip {
   
   .liEpic {
     padding: 10px;
+    color:#673AB7 !important;
     overflow: hidden !important;
     padding-bottom: 3vh;
     overflow: auto;
-    max-height: 10vh;
-    color:#673AB7;
   }
   
   .liEpic:hover {
@@ -249,5 +251,10 @@ mat-chip {
   .subTemp {
       padding-left: 1.5vw;
       padding-right: 1.5vw;
-      background-color:rgba(0,0,0,0.3);
+      background-color:rgba(0,0,0,0.5);
+  }
+
+  .littleImage {
+      height: 20px;
+      width: 20px;
   }
