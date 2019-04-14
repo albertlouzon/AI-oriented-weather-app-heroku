@@ -6,13 +6,7 @@
         height: 100%;
 }
 
-.topInputContainer {
-    height: 10vh;
-    width: 100%;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-}
+
 .mainInput{
     font-size: 18px;
     color:#3F51B5;
@@ -25,16 +19,7 @@
     position: absolute;
     top: 40%
 }
-.weatherIcon{
-    font-size: 90px;
-    margin-left: -4vw;
-    margin-bottom: 20px;
-}
-.mainDescription {
-    font-family: 'Ubuntu' !important;
-    font-size: 13px;
-    color:#3949AB;
-}
+
 
 .catTitle {
     color:#8E24AA;
@@ -64,12 +49,7 @@
 .full-width{
     width: 80vw;
 }
-.topInput {
-z-index: 100;
-position: fixed;
-top:0;
-left: 0;
-}
+
 
 a {
     text-decoration: none !important;
@@ -108,14 +88,10 @@ a {
 
 .star-bg, .wb_sunny-bg, .wb_iridescent-bg, .filter_drama-bg, .ac_unit-bg, .default{
     z-index: -500;
-    display: flex;
-    justify-content: space-between;
-    flex-flow: column nowrap;
   }
 
   .default{
     background-image: linear-gradient(#EFEFBB, #D4D3DD);
-    height: 100vh;
   }
 
   .extremesContainer {
@@ -133,3 +109,93 @@ a {
 .full-heigth {
     height: 90vh;
 }
+
+
+html,
+body {
+  min-height: 100%;
+}
+.fullscreen {
+  height: 100vh;
+  background-color: #ccc;
+  display: flex;
+  flex-direction: column;
+}
+.top, .bottom {
+  width: 100%;
+  text-align: center;
+}
+.middle {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  margin: 10px 0;
+}
+.center {
+  flex: 1;
+}
+
+.top{
+    height: 10%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.left {
+    width: 25%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+
+/* .right {
+    width: 25%;
+    background-color:red;
+} */
+
+.epicContainer {
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    flex-flow: row nowrap;
+}
+
+.hotContainer {
+    height: 100%;
+    width: 50%;
+background-color: red
+}
+
+.coldContainer {
+    height: 100%;
+    background-color: green;
+    width: 50%;
+
+}
+.globalScore {
+    height: 40%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+}
+
+.weatherContainer {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center
+}
+#temperature {
+
+}
+
+.weatherIcon{
+    font-size: 4em;
+}
+.mainDescription {
+    font-family: 'Ubuntu' !important;
+    font-size: 2em;
+    color:#3949AB;
+}
+

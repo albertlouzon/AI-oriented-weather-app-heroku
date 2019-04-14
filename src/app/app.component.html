@@ -1,5 +1,59 @@
 
+
+<div class="fullscreen">
+    <h1  *ngIf='!showDetails && !loader' style="text-align: center; margin-top: 10vh; color:#8E24AA;">SMART WEATHER: Get the weather of anything</h1>
+    <div *ngIf='!showDetails && !loader' class='welcomeInput'>
+    <mat-form-field class="full-width">
+        <input type='text' class='mainInput' matInput (keyup)="onChange($event.target.value)" placeholder="Write a word in english">
+      </mat-form-field>
+      <button mat-button (click)="onSelectCountry()">Lets go</button>
+
+    </div>
+
+
+    <div class="top" *ngIf='loader || showDetails'>
+        <mat-form-field >
+            <input type='text' class='mainInput' matInput (keyup)="onChange($event.target.value)" placeholder="Another try ?">
+          </mat-form-field>
+          <button mat-button (click)="onSelectCountry()">Lets go</button>
+    </div>
+    <div class="middle">
+      <div class="left entitiesContainer">entities
+          <mat-chip-list>
+              <!-- <mat-chip color="primary" selected>Primary fish</mat-chip> -->
+              <mat-chip [color]="assignColorToEntity(entity)" (click)="onClickingEntity(entity)"  *ngFor="let entity of entitiesKeys" selected>{{entity}}</mat-chip>
+            </mat-chip-list>
+      </div>
+      <div class="center">
+            <div class='globalScore'>
+              Global score
+              <div class='weatherContainer'>
+                <mat-icon class='weatherIcon'>
+                    {{convertScoreToIcon(finalDetail.score)}}
+                </mat-icon>
+                <div id='temperature'>
+                    {{convertScoreToTemperature(finalDetail.score)}}
+                  </div>
+              </div>
+              <div class='mainDescription'>{{convertScoreToDescription(convertScoreToIcon(finalDetail.score))}}</div>
+            </div>
+        <!-- <h4 style="margin-right:15px; color:#8E24AA">Click on the filters</h4> -->
+            <div class='epicContainer'>
+                  <div class='hotContainer'>
+
+                  </div>
+                  <div class='coldContainer'>
+                    
+                  </div>
+            </div>
+      </div>
+      <div class="right categoriesContainer"></div>
+    </div>
+    <div class="bottom">the articles are provided by google news api</div>
+  </div>
 <div>
+
+
   <div [className]="dynamicBg">
       <h1  *ngIf='!showDetails && !loader' style="text-align: center; margin-top: 10vh; color:#8E24AA;">SMART WEATHER: Get the weather of anything</h1>
       <div *ngIf='!showDetails && !loader' class='welcomeInput'>
@@ -15,9 +69,11 @@
       </mat-form-field>
       <button mat-button (click)="onSelectCountry()">Lets go</button>
     </div>
-    <div *ngIf='showDetails' class='row col-12 full-heigth'>
 
-      <mat-grid-list cols="4" rowHeight="500px">
+
+    <div *ngIf='showDetails'>
+
+      <div class='row col-12 full-heigth'>
         <!-- <main> -->            
             <mat-grid-tile
               [colspan]="tiles[1].cols"
@@ -106,7 +162,7 @@
   
       
         <!-- </main> -->
-        </mat-grid-list>
+    </div>
       </div>
 
         <div *ngIf='loader' class='spinnerCont'>
