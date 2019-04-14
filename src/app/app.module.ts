@@ -13,7 +13,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatListModule} from '@angular/material/list';
-
 import { AppComponent } from './app.component';
 import { ModalComponent } from './modal/modal.component';
 

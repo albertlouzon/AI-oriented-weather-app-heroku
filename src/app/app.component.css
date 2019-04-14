@@ -3,9 +3,11 @@
     justify-content: space-between;
     flex-flow: column nowrap;
         align-items: center;
+        height: 100%;
 }
 
 .topInputContainer {
+    height: 10vh;
     width: 100%;
     display: flex;
     flex-flow: row nowrap;
@@ -30,7 +32,7 @@
 }
 .mainDescription {
     font-family: 'Ubuntu' !important;
-    font-size: 20px;
+    font-size: 13px;
     color:#3949AB;
 }
 
@@ -73,6 +75,10 @@ a {
     text-decoration: none !important;
 }
 
+::ng-deep .mat-figure{
+    margin-bottom: 15px;
+}
+
 .star , .star-bg{
     background-color:#FFC107;
     background-image: linear-gradient(#F2994A, #F2C94C);
@@ -112,4 +118,18 @@ a {
     height: 100vh;
   }
 
-  
+  .extremesContainer {
+      display: flex;
+      flex-flow: row;
+      justify-content: space-evenly;
+      width: 100%;
+  }
+
+  /* .extreme {
+
+  } */
+/* Add application styles & imports to this file! */
+
+.full-heigth {
+    height: 90vh;
+}
