@@ -108,7 +108,24 @@ export class AppComponent {
 
     }
   }
-
+  convertScoreToImage(score: number) {
+    if (score > 0.45) {
+      return "../assets/arcenciel.png"
+    } else if (score > 0) {
+      return "../assets/sun.png"
+    }
+    else if (score > -0.2) {
+      return "../assets/sunCloud.png"
+    }
+    else if (score > -0.4) {
+      return "../assets/cloud.png"
+    }
+    else if (score > -0.5) {
+      return "../assets/rain.png"
+    } else {
+      return "../assets/ice.png"
+    }
+  }
   convertScoreToIcon(score: number) {
     if (score > 0.45) {
       return "star"
@@ -138,8 +155,22 @@ export class AppComponent {
     }
   }
 
+  convertTemperatureToColor(score: number){
+    const temperature = Math.floor((score * 50) + toleranceFactor);
+    if(temperature > 10) {
+      return '#9E9D24'
+
+    } else if(temperature > -15) {
+      return '#F9A825'
+
+    } else {
+      return '#C62828'
+
+    }
+  }
+
   convertScoreToTemperature(score: number) {
-    const temperature = (score * 50) + toleranceFactor;
+    const temperature = Math.floor((score * 50) + toleranceFactor);
     return Math.trunc(temperature) + ' °C'
   }
 
@@ -222,7 +253,6 @@ export class AppComponent {
     ).subscribe((res) => {
       console.log('AU CALME', res)
       this.finalDetail = res
-      this.finalDetail['score'] = Math.trunc(this.finalDetail['score'])
        this.filterEntities()
        this.epicArticles =  this.filterExtremes()
        console.log('epic articles:', this.epicArticles)

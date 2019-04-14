@@ -1,6 +1,6 @@
 
 
-<div class="fullscreen">
+<div  [className]="'fullscreen '+ dynamicBg">
     <h1  *ngIf='!showDetails && !loader' style="text-align: center; margin-top: 10vh; color:#8E24AA;">SMART WEATHER: Get the weather of anything</h1>
     <div *ngIf='!showDetails && !loader' class='welcomeInput'>
     <mat-form-field class="full-width">
@@ -17,33 +17,54 @@
           </mat-form-field>
           <button mat-button (click)="onSelectCountry()">Lets go</button>
     </div>
-    <div class="middle">
-      <div class="left entitiesContainer">entities
-          <mat-chip-list>
+    <div *ngIf="showDetails" class="middle">
+      <div class="left shadow acrylic">
+          <mat-chip-list class='mat-chip-list-stacked'>
               <!-- <mat-chip color="primary" selected>Primary fish</mat-chip> -->
               <mat-chip [color]="assignColorToEntity(entity)" (click)="onClickingEntity(entity)"  *ngFor="let entity of entitiesKeys" selected>{{entity}}</mat-chip>
             </mat-chip-list>
       </div>
       <div class="center">
-            <div class='globalScore'>
-              Global score
+            <div class='globalScore shadow acrylic'>
               <div class='weatherContainer'>
-                <mat-icon class='weatherIcon'>
-                    {{convertScoreToIcon(finalDetail.score)}}
-                </mat-icon>
-                <div id='temperature'>
+                <img [src]="convertScoreToImage(finalDetail.score)" class='weatherIcon'>
+                    
+                <div [style.color]="convertTemperatureToColor(finalDetail.score)" class='mainTemp' id='temperature'>
                     {{convertScoreToTemperature(finalDetail.score)}}
                   </div>
               </div>
               <div class='mainDescription'>{{convertScoreToDescription(convertScoreToIcon(finalDetail.score))}}</div>
             </div>
         <!-- <h4 style="margin-right:15px; color:#8E24AA">Click on the filters</h4> -->
-            <div class='epicContainer'>
+            <div class='epicContainer shadow acrylic'>
+                <!-- <h3 mat-subheader>Hottest</h3> -->
                   <div class='hotContainer'>
+                     <ul class='ulEpic'>
+                        <li class="liEpic" *ngFor="let article of epicArticles.max">
+                            <img  class="imgEpic" [src]="convertScoreToImage(article.sentiment.document.score)" >
+                            <!-- <mat-icon class="imgEpic"  mat-list-icon>{{convertScoreToIcon(article.sentiment.document.score)}}</mat-icon> -->
+                            <span class='subTemp' [style.color]="convertTemperatureToColor(article.sentiment.document.score)"> {{convertScoreToTemperature(article.sentiment.document.score)}}</span>
+                            <h3  class="hEpic">                         
+                               <p><a target="_blank" rel="noopener noreferrer" [href]="article.retrieved_url"> <span>{{article.title}} </span> </a>
+                            </h3>
+                          </li>
+                     </ul>
 
+                     
                   </div>
+          <!-- <h3 mat-subheader>Frozen</h3> -->
                   <div class='coldContainer'>
-                    
+                      <ul class='ulEpic'>
+                          <li class="liEpic" *ngFor="let article of epicArticles.min">
+                              <img  class="imgEpic" [src]="convertScoreToImage(article.sentiment.document.score)" >
+                              <!-- <mat-icon class="imgEpic"  mat-list-icon>{{convertScoreToIcon(article.sentiment.document.score)}}</mat-icon> -->
+                              <span class='subTemp' [style.color]="convertTemperatureToColor(article.sentiment.document.score)"> {{convertScoreToTemperature(article.sentiment.document.score)}}</span>
+                              <h3  class="hEpic">                         
+                                 <p><a target="_blank" rel="noopener noreferrer" [href]="article.retrieved_url"> <span>{{article.title}} </span> </a>
+                              </h3>
+                            </li>
+                       </ul>
+  
                   </div>
             </div>
       </div>
@@ -51,126 +72,8 @@
     </div>
     <div class="bottom">the articles are provided by google news api</div>
   </div>
+  <div *ngIf='loader' class='spinnerCont'>
+      <mat-spinner class="loadSpinner" ></mat-spinner>
+      <span>{{dynamicStatus}}</span>
+  </div>
 <div>
-
-
-  <div [className]="dynamicBg">
-      <h1  *ngIf='!showDetails && !loader' style="text-align: center; margin-top: 10vh; color:#8E24AA;">SMART WEATHER: Get the weather of anything</h1>
-      <div *ngIf='!showDetails && !loader' class='welcomeInput'>
-      <mat-form-field class="full-width">
-          <input type='text' class='mainInput' matInput (keyup)="onChange($event.target.value)" placeholder="Write a word in english">
-        </mat-form-field>
-        <button mat-button (click)="onSelectCountry()">Lets go</button>
-  
-      </div>
-    <div class=topInputContainer *ngIf='loader || showDetails' >
-        <mat-form-field >
-        <input type='text' class='mainInput' matInput (keyup)="onChange($event.target.value)" placeholder="Another try ?">
-      </mat-form-field>
-      <button mat-button (click)="onSelectCountry()">Lets go</button>
-    </div>
-
-
-    <div *ngIf='showDetails'>
-
-      <div class='row col-12 full-heigth'>
-        <!-- <main> -->            
-            <mat-grid-tile
-              [colspan]="tiles[1].cols"
-              [rowspan]="tiles[1].rows">
-              <div class="globalScoreContainer">
-                  <mat-icon  class='weatherIcon'>{{convertScoreToIcon(finalDetail.score)}}</mat-icon>
-                  <h4 class='mainDescription'>{{convertScoreToDescription(convertScoreToIcon(finalDetail.score))}}</h4>
-                        <!-- <span >Score : {{finalDetail.score}}</span> -->
-              </div>
-              
-            
-          </mat-grid-tile>
-
-          <mat-grid-tile
-          class="acrylic shadow"
-          [colspan]="tiles[3].cols"
-          [rowspan]="tiles[3].rows"
-          >
-          <h4 style="margin-right:15px; color:#8E24AA">Click on the filters</h4>
-          <mat-chip-list>
-              <!-- <mat-chip color="primary" selected>Primary fish</mat-chip> -->
-              <mat-chip [color]="assignColorToEntity(entity)" (click)="onClickingEntity(entity)"  *ngFor="let entity of entitiesKeys" selected>{{entity}}</mat-chip>
-            </mat-chip-list>
-        </mat-grid-tile>
-            
-          <mat-grid-tile
-          [colspan]="tiles[0].cols"
-          [rowspan]="tiles[0].rows"
-          class="acrylic shadow"
-          >
-          <div class="extremesContainer">
-            <div class='extreme'>
-                <mat-list>
-                    <h3 mat-subheader>Hottest</h3>
-                    <mat-list-item *ngFor="let article of epicArticles.max">
-                      <mat-icon mat-list-icon>{{convertScoreToIcon(article.sentiment.document.score)}}</mat-icon>
-                      <h4 mat-line> {{convertScoreToTemperature(article.sentiment.document.score)}}</h4>
-                      <p mat-line><a target="_blank" rel="noopener noreferrer" [href]="article.retrieved_url"> <span>{{article.title}} </span> </a>
-                      </p>
-                    </mat-list-item>
-                </mat-list>
-            </div>
-            <div class='extreme'>
-                <mat-list>
-                    <h3 mat-subheader>Frozen</h3>
-                    <mat-list-item *ngFor="let article of epicArticles.min">
-                      <mat-icon mat-list-icon>{{convertScoreToIcon(article.sentiment.document.score)}}</mat-icon>
-                      <h4 mat-line> {{convertScoreToTemperature(article.sentiment.document.score)}}</h4>
-                      <p mat-line><a target="_blank" rel="noopener noreferrer" [href]="article.retrieved_url"> <span>{{article.title}} </span> </a>
-                      </p>
-                    </mat-list-item>
-                </mat-list>
-             </div>
-        </div>
-      </mat-grid-tile>
-
-  
-          <!-- <mat-grid-tile
-          class="acrylic shadow"
-          [colspan]="tiles[2].cols"
-          [rowspan]="tiles[2].rows"
-          >
-          <mat-accordion>
-          
-          <h4  style="color:#8E24AA">{{finalDetail.mainCategories.length}} CATEGORIES</h4>
-          <mat-expansion-panel *ngFor="let category of finalDetail.mainCategories">
-                <mat-expansion-panel-header>
-                <mat-panel-title>
-                    <span>{{category.label}} </span> 
-                </mat-panel-title>
-                <mat-panel-description>
-                  <mat-icon style="margin-left:15px">{{convertScoreToIcon(category.globalCatScore)}}</mat-icon>
-                </mat-panel-description>
-                </mat-expansion-panel-header>
-                <ul *ngFor="let article of category.listOfUrls">
-                    <li>    <a target="_blank" rel="noopener noreferrer" [href]="article.url"><span class='catTitle'>{{article.title}}</span></a> 
-                      <mat-icon>{{convertScoreToIcon(article.score)}}</mat-icon>
-            
-                    </li>
-                </ul>
-      </mat-expansion-panel>
-      </mat-accordion>
-      
-      </mat-grid-tile> -->
-         
-  
-      
-        <!-- </main> -->
-    </div>
-      </div>
-
-        <div *ngIf='loader' class='spinnerCont'>
-            <mat-spinner class="loadSpinner" ></mat-spinner>
-            <span>{{dynamicStatus}}</span>
-        </div>
-      
-  </div>
-  </div>
-
-  <!-- <span>the articles are fetched by google news api and ibm-nlu</span> -->

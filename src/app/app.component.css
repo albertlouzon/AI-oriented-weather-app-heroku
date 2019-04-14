@@ -94,13 +94,6 @@ a {
     background-image: linear-gradient(#EFEFBB, #D4D3DD);
   }
 
-  .extremesContainer {
-      display: flex;
-      flex-flow: row;
-      justify-content: space-evenly;
-      width: 100%;
-  }
-
   /* .extreme {
 
   } */
@@ -125,6 +118,11 @@ body {
   width: 100%;
   text-align: center;
 }
+.bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
 .middle {
   flex: 1;
   width: 100%;
@@ -145,8 +143,9 @@ body {
 .left {
     width: 25%;
     display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 /* .right {
@@ -160,18 +159,26 @@ body {
     justify-content: center;
     flex-flow: row nowrap;
 }
-
+mat-chip {
+    max-width: 200px
+  }
 .hotContainer {
     height: 100%;
     width: 50%;
-background-color: red
+    /* background-color: red; */
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
 }
 
 .coldContainer {
     height: 100%;
-    background-color: green;
     width: 50%;
-
+    /* background-color: green; */
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    font-size: 14px;
 }
 .globalScore {
     height: 40%;
@@ -181,21 +188,66 @@ background-color: red
 }
 
 .weatherContainer {
+    height: 40%;
     width: 100%;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: center
+    justify-content: space-around;
+}
+.mainTemp {
+    font-size: 2em;
 }
 #temperature {
-
+    margin-top: 15px;
+    font-family: 'Roboto Mono', monospace;
+    font: bold 40px/1.7 !important;
 }
 
 .weatherIcon{
-    font-size: 4em;
+    height: 18vh;
+    width: 18vh
 }
 .mainDescription {
-    font-family: 'Ubuntu' !important;
-    font-size: 2em;
+    font: bold 15px/1.7 'Ubuntu' !important;
     color:#3949AB;
+    /* overflow: hidden; */
 }
+  
+  .ulEpic {
+    list-style-type: none;
+    height: 100%;
+  }
+  
+  .h3Epic {
+    font-family:  Helvetica, Verdana, sans-serif;
+    font-size: 1em;
+  }
+  
+  .imgEpic {
+    float: left;
+    margin: 0 15px 0 0;
+    height: 6vw;
+    width: 6vw;
+    font-size: 50px;
+  }
+  
+  
+  .liEpic {
+    padding: 10px;
+    overflow: hidden !important;
+    padding-bottom: 3vh;
+    overflow: auto;
+    max-height: 10vh;
+    color:#673AB7;
+  }
+  
+  .liEpic:hover {
+    background: darkgray;
+    cursor: pointer;
+  }
 
+  .subTemp {
+      padding-left: 1.5vw;
+      padding-right: 1.5vw;
+      background-color:rgba(0,0,0,0.3);
+  }
