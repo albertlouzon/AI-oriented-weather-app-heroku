@@ -260,7 +260,7 @@ export class AppComponent {
     }, 7000);
     setTimeout(() => {
       this.dynamicStatus = "Damn I give up. Gimme another word"
-    }, 1300);
+    }, 13000);
     this.http.post(`${heroku}${this.userInput}`, null
     ).subscribe((res) => {
       console.log('AU CALME', res)
