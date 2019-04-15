@@ -21,6 +21,24 @@ export class ModalComponent implements OnInit {
     this.bottomSheetRef.dismiss();
     event.preventDefault();
   }
+  convertScoreToImage(score: number) {
+    if (score > 0.45) {
+      return "../assets/arcenciel.png"
+    } else if (score > 0) {
+      return "../assets/sun.png"
+    }
+    else if (score > -0.2) {
+      return "../assets/sunCloud.png"
+    }
+    else if (score > -0.4) {
+      return "../assets/cloud.png"
+    }
+    else if (score > -0.5) {
+      return "../assets/rain.png"
+    } else {
+      return "../assets/ice.png"
+    }
+  }
   convertScoreToIcon(score: number) {
     if (score > 0.45) {
       return "star"

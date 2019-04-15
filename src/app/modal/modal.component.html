@@ -13,8 +13,7 @@
             <li *ngFor="let article of words.article" mat-line>
                <a target="_blank" rel="noopener noreferrer"  [href]="article.url" class="wordTitle">{{article.title}}
                 </a>
-              <mat-icon>{{convertScoreToIcon(article.score)}}</mat-icon>
-
+                <img class="entitieslittleImg" [src]='convertScoreToImage(article.score)'>
               </li>
       </mat-expansion-panel>
       </mat-accordion>
