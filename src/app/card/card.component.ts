@@ -139,6 +139,7 @@ h2.city {
     font-weight: 300;
     margin: 0 0 20px;
     position: relative;
+    color: black;
 }
 
 h2.city:after {
