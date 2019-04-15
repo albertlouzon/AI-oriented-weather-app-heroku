@@ -193,8 +193,8 @@ mat-chip {
 }
 #temperature {
     margin-top: 15px;
-    font-family: 'Roboto Mono', monospace;
-    font: bold 40px/1.7 !important;
+    font-family: 'Roboto Mono', monospace !important;
+    font-weight: 600;
 }
 
 .weatherIcon{
@@ -260,7 +260,7 @@ a { color: inherit; }
  
   
   .liEpic:hover {
-    background: darkgray;
+    background-color:  rgba(0,0,0,0.5);;
     cursor: pointer;
   }
 

@@ -256,8 +256,12 @@ export class AppComponent {
     // console.log('sending link to server from config json...',c['sources'][this.fetchAttempts]['feedlink'])
     // console.log('selected keyword :', this.userInput)
     setTimeout(() => {
-      this.dynamicStatus = "First request ? wait a bit ;)"
+      this.dynamicStatus = 'Mmmmh, ' + this.userInput + ' is delicious. Let me enjoy it a bit more'
     }, 7000);
+
+    setTimeout(() => {
+      this.dynamicStatus = "First request today ? wait a bit ;)"
+    }, 10000);
     setTimeout(() => {
       this.dynamicStatus = "Damn I give up. Gimme another word"
     }, 13000);
