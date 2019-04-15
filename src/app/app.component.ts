@@ -33,7 +33,7 @@ export class AppComponent {
   epicArticles : { max: any[], min: any[] }
   userInput = 'bitcoin';
   showDetails = false;
-  dynamicStatus = 'We are analyzing articles related to ' + this.userInput + ' ...';
+  dynamicStatus = 'Lets see what feedback I can get from ' + this.userInput;
   selected = '';
   dynamicBg = 'default'
   screenHeight = window.screen.height;
@@ -209,11 +209,13 @@ export class AppComponent {
     const extremes = this.finalDetail['extremes']
     this.extremes.min = [this.finalDetail['extremes'][0],
     this.finalDetail['extremes'][1],
-    this.finalDetail['extremes'][2]];
+    // this.finalDetail['extremes'][2]
+  ];
 
     this.extremes.max = [this.finalDetail['extremes'][extremes.length - 1],
     this.finalDetail['extremes'][extremes.length - 2],
-    this.finalDetail['extremes'][extremes.length - 3]]
+    // this.finalDetail['extremes'][extremes.length - 3]
+  ]
 
     this.extremes.min.forEach((score) => {
     const full_article = this.finalDetail['metadata'].find(full_article => full_article['sentiment']['document']['score'] === score)
@@ -254,8 +256,11 @@ export class AppComponent {
     // console.log('sending link to server from config json...',c['sources'][this.fetchAttempts]['feedlink'])
     // console.log('selected keyword :', this.userInput)
     setTimeout(() => {
-      this.dynamicStatus = "Damn its long! If its not your first request, then I didnt find articles :("
-    }, 10000);
+      this.dynamicStatus = "First request ? wait a bit ;)"
+    }, 7000);
+    setTimeout(() => {
+      this.dynamicStatus = "Damn I give up. Gimme another word"
+    }, 1300);
     this.http.post(`${heroku}${this.userInput}`, null
     ).subscribe((res) => {
       console.log('AU CALME', res)

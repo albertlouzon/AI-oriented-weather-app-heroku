@@ -16,6 +16,7 @@ import {MatListModule} from '@angular/material/list';
 import { AppComponent } from './app.component';
 import { ModalComponent } from './modal/modal.component';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatBadgeModule,
     MatChipsModule,
     MatBottomSheetModule,
+    MatDividerModule,
     MatListModule
   ],
   providers: [HttpClientModule],

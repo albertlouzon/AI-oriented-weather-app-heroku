@@ -38,37 +38,44 @@
               <div class='mainDescription'>{{convertScoreToDescription(convertScoreToIcon(finalDetail.score))}}</div>
             </div>
             <div class='epicContainer shadow acrylic'>
-                  <div class='hotContainer'>
-                     <ul class='ulEpic'>
+                  <div class='hotContainer tepu'>
                         <li class="liEpic" *ngFor="let article of epicArticles.max">
+                            <div class='epicImgCont'>
                             <img  class="imgEpic" [src]="article.urlToImage || convertScoreToImage(article.sentiment.document.score)" >
                             <!-- <mat-icon class="imgEpic"  mat-list-icon>{{convertScoreToIcon(article.sentiment.document.score)}}</mat-icon> -->
                             <span class='subTemp' [style.color]="convertTemperatureToColor(article.sentiment.document.score)"> 
-                              {{convertScoreToTemperature(article.sentiment.document.score)}}
-                              <img  class="littleImage" [src]="convertScoreToImage(article.sentiment.document.score)" >
+                              <span class='realsubTemp'>
+                                  {{convertScoreToTemperature(article.sentiment.document.score)}}
+                                  <img  class="littleImage" [src]="convertScoreToImage(article.sentiment.document.score)" >
+                              </span>
+                  
+                              <h4  class="hEpic">                         
+                                  <p><a target="_blank" rel="noopener noreferrer" [href]="article.retrieved_url"> <span>{{article.title}} </span> </a>
+                               </h4>
                             </span>
-                            <h3  class="hEpic">                         
-                               <p><a target="_blank" rel="noopener noreferrer" [href]="article.retrieved_url"> <span>{{article.title}} </span> </a>
-                            </h3>
+                            </div>
+                            <mat-divider></mat-divider>
                           </li>
-                     </ul>
 
                      
                   </div>
-                  <div class='coldContainer'>
-                      <ul class='ulEpic'>
+                  <div class='coldContainer tepu'>
                           <li class="liEpic" *ngFor="let article of epicArticles.min">
-                              <img  class="imgEpic" [src]="article.urlToImage || convertScoreToImage(article.sentiment.document.score)" >
-                              <!-- <mat-icon class="imgEpic"  mat-list-icon>{{convertScoreToIcon(article.sentiment.document.score)}}</mat-icon> -->
-                              <span class='subTemp' [style.color]="convertTemperatureToColor(article.sentiment.document.score)">
-                                 {{convertScoreToTemperature(article.sentiment.document.score)}}
-                                 <img  class="littleImage" [src]="convertScoreToImage(article.sentiment.document.score)" >
-                                </span>
-                              <h3  class="hEpic">                         
-                                 <p><a target="_blank" rel="noopener noreferrer" [href]="article.retrieved_url"> <span>{{article.title}} </span> </a>
-                              </h3>
+                              <div class='epicImgCont'>
+                                  <img  class="imgEpic" [src]="article.urlToImage || convertScoreToImage(article.sentiment.document.score)" >
+                                  <!-- <mat-icon class="imgEpic"  mat-list-icon>{{convertScoreToIcon(article.sentiment.document.score)}}</mat-icon> -->
+                                  <span class='subTemp' [style.color]="convertTemperatureToColor(article.sentiment.document.score)">
+                                     {{convertScoreToTemperature(article.sentiment.document.score)}}
+                                     <img  class="littleImage" [src]="convertScoreToImage(article.sentiment.document.score)" >
+                                     <h4  class="hEpic">                         
+                                        <p><a target="_blank" rel="noopener noreferrer" [href]="article.retrieved_url"> <span>{{article.title}} </span> </a>
+                                     </h4>
+                                    </span>
+                              </div>
+
+                              <mat-divider></mat-divider>
+
                             </li>
-                       </ul>
   
                   </div>
             </div>
