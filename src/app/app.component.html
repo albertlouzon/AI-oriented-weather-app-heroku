@@ -1,23 +1,36 @@
 
 
-<div  [className]="'fullscreen '+ dynamicBg">
+
+<div  [className]="'fullscreen '">
+  
+        <button  class='samerlachienne' color='primary' mat-raised-button [matMenuTriggerFor]="menu" >Expand Filters</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item 
+             (click)="onClickingEntity(entity)"  *ngFor="let entity of entitiesKeys" 
+            >
+          <span class="yellow" style="margin-right: 20px;">{{entity}}: </span>
+          {{finalDetail['entities'][entity].length}} links
+        </button>
+    </mat-menu>
+
     <h1  *ngIf='!showDetails && !loader' style="text-align: center; margin-top: 10vh; color:#8E24AA;">SMART WEATHER: Get the weather of anything</h1>
     <div *ngIf='!showDetails && !loader' class='welcomeInput'>
     <mat-form-field class="full-width">
         <input type='text' class='mainInput' matInput (keyup)="onChange($event.target.value)" placeholder="Write a word in english">
       </mat-form-field>
-      <button mat-button (click)="onSelectCountry()">Lets go</button>
+      <button color='primary' mat-button  (click)="onSelectCountry()">Lets go</button>
 
     </div>
 
 
     <div class="top" *ngIf='loader || showDetails'>
         <mat-form-field >
-            <input type='text' class='mainInput' matInput (keyup)="onChange($event.target.value)" placeholder="Another try ?">
+            <input type='text' class='mainInput' matInput (keyup)="onChange($event.target.value)" placeholder="NEW SEARCH">
           </mat-form-field>
-          <button mat-button (click)="onSelectCountry()">Lets go</button>
+          <button color='primary' mat-button (click)="onSelectCountry()">Lets go</button>
     </div>
     <div *ngIf="showDetails" class="middle">
+       
       <div class="left shadow acrylic">
           <button mat-raised-button 
           [matBadge]="finalDetail['entities'][entity].length" matBadgePosition="before" [matBadgeColor]="REVERSEassignColorToEntity(entity)" class='entityBtn'
@@ -29,20 +42,35 @@
       <div class="center">
             <div class='globalScore shadow acrylic'>
               <div class='weatherContainer'>
-                <img [src]="convertScoreToImage(finalDetail.score)" class='weatherIcon'>
-                    
-                <div [style.color]="convertTemperatureToColor(finalDetail.score)" class='mainTemp' id='temperature'>
-                    {{convertScoreToTemperature(finalDetail.score)}}
-                  </div>
+                  <app-card [name]="userInput" [description] = "convertScoreToDescription(convertScoreToIcon(finalDetail.score))"
+                  [color]="convertTemperatureToColor(finalDetail.score)" [icon]="convertScoreToImage(finalDetail.score)"
+                  [temperature]="convertScoreToTemperature(finalDetail.score)" [bg]="convertScoreToIcon(finalDetail.score)" ></app-card>
+
+                
               </div>
-              <div class='mainDescription'>{{convertScoreToDescription(convertScoreToIcon(finalDetail.score))}}</div>
             </div>
-            <div class='epicContainer shadow acrylic'>
-                  <div class='hotContainer tepu'>
+                <div  [ngStyle]="{'height': [dynamicHeigth]}"  class="cards">
+                    <li class="cards_item" *ngFor="let article of epicArticles.max">
+                      <div [className]="'card'">
+                        <div class="card_image"><img [src]="article.urlToImage || convertScoreToImage(article.sentiment.document.score)"></div>
+                        <div [className]="'card_content ' + article.bg">
+                          <h2  class='card_title ' [style.color]="convertTemperatureToColor(article.sentiment.document.score)">{{convertScoreToTemperature(article.sentiment.document.score)}}
+                              <img  class="littleImage" [src]="convertScoreToImage(article.sentiment.document.score)" >
+                          </h2>
+                          <span  class="hEpic card-text">                         
+                              <p>{{article.title}} 
+                              </span>
+                              <a target="_blank" rel="noopener noreferrer" [href]="article.retrieved_url"> <button class="btn card_btn">Read</button> </a>
+                        </div>
+                      </div>
+                    </li>
+                  </div>
+           </div>
+
+                  <!-- <div class='hotContainer tepu'>
                         <li class="liEpic" *ngFor="let article of epicArticles.max">
                             <div class='epicImgCont'>
                             <img  class="imgEpic" [src]="article.urlToImage || convertScoreToImage(article.sentiment.document.score)" >
-                            <!-- <mat-icon class="imgEpic"  mat-list-icon>{{convertScoreToIcon(article.sentiment.document.score)}}</mat-icon> -->
                             <span class='subTemp' [style.color]="convertTemperatureToColor(article.sentiment.document.score)"> 
                                   {{convertScoreToTemperature(article.sentiment.document.score)}}
                                   <img  class="littleImage" [src]="convertScoreToImage(article.sentiment.document.score)" >
@@ -54,14 +82,11 @@
                             </div>
                             <mat-divider></mat-divider>
                           </li>
-
-                     
                   </div>
                   <div class='coldContainer tepu'>
                           <li class="liEpic" *ngFor="let article of epicArticles.min">
                               <div class='epicImgCont'>
                                   <img  class="imgEpic" [src]="article.urlToImage || convertScoreToImage(article.sentiment.document.score)" >
-                                  <!-- <mat-icon class="imgEpic"  mat-list-icon>{{convertScoreToIcon(article.sentiment.document.score)}}</mat-icon> -->
                                   <span class='subTemp' [style.color]="convertTemperatureToColor(article.sentiment.document.score)">
                                      {{convertScoreToTemperature(article.sentiment.document.score)}}
                                      <img  class="littleImage" [src]="convertScoreToImage(article.sentiment.document.score)" >
@@ -74,14 +99,10 @@
                               <mat-divider></mat-divider>
 
                             </li>
-  
-                  </div>
-            </div>
+                  </div> -->
       </div>
       <div class="right categoriesContainer"></div>
     </div>
-    <!-- <div class="bottom">the articles are provided by google news api</div> -->
-  </div>
   <div *ngIf='loader' class='spinnerCont'>
       <mat-spinner class="loadSpinner" ></mat-spinner>
       <span>{{dynamicStatus}}</span>

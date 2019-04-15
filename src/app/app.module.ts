@@ -17,14 +17,19 @@ import { AppComponent } from './app.component';
 import { ModalComponent } from './modal/modal.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatDividerModule} from '@angular/material/divider';
+import { CardComponent } from './card/card.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { SidebarModule } from 'ng-sidebar';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ModalComponent
+    ModalComponent,
+    CardComponent
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MatSelectModule,
@@ -39,7 +44,10 @@ import {MatDividerModule} from '@angular/material/divider';
     MatChipsModule,
     MatBottomSheetModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    MatMenuModule,
+        SidebarModule.forRoot(),
+    MatSidenavModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],

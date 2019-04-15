@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 export let tepu = '4FbZkA9jG55iOqVkQiV_OyG7wmlD9RKLChMnd5BjQLP_'
 export let ibmUrl = 'https://gateway-lon.watsonplatform.net/natural-language-understanding/api/v1/analyze'
@@ -14,7 +14,7 @@ const toleranceFactor = 10
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   countries = country_list;
   urls = {
     theGuardian: 'https://www.theguardian.com/world/'
@@ -27,6 +27,8 @@ export class AppComponent {
     // listOfAllUrls: Array<string>
   };
   entitiesKeys = []
+  dynamicHeigth = '400px'
+  moroblan : ['l','l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l' ]
   entitiesValues = []
   currentEntity: any = {};
   extremes = { max: [], min: [] }
@@ -38,6 +40,7 @@ export class AppComponent {
   dynamicBg = 'default'
   screenHeight = window.screen.height;
   loader = false
+  private _opened: boolean = false;
   tiles = [ 
     { text: 'Country title and weather description', cols: 4, rows: 3, color: '#3F51B5' },
     { text: 'Weather icon and temperature', cols: 4, rows: 2, color: '#3F51B5' },
@@ -79,6 +82,11 @@ export class AppComponent {
     });
     console.log('height ', this.screenHeight)
   }
+
+
+ngOnInit(){
+}
+
   changeGlobalScoreColor(score: number) {
     if (score > 0.3) {
       this.dynamicBg = "star-bg"
@@ -204,35 +212,31 @@ export class AppComponent {
     this.entitiesKeys = Object.keys(this.finalDetail['entities'])
   }
   filterExtremes() {
+    console.log(this.finalDetail['extremes'], 'izefefo')
     const filteredMin = []
-    const filteredMax = []
-    const extremes = this.finalDetail['extremes']
-    this.extremes.min = [this.finalDetail['extremes'][0],
-    this.finalDetail['extremes'][1],
-    // this.finalDetail['extremes'][2]
-  ];
-
-    this.extremes.max = [this.finalDetail['extremes'][extremes.length - 1],
-    this.finalDetail['extremes'][extremes.length - 2],
-    // this.finalDetail['extremes'][extremes.length - 3]
-  ]
-
-    this.extremes.min.forEach((score) => {
-    const full_article = this.finalDetail['metadata'].find(full_article => full_article['sentiment']['document']['score'] === score)
-    if(full_article) {
-      filteredMin.push(full_article)
-    }
-    })
-
+    let filteredMax = []
     
-    this.extremes.max.forEach((score) => {
+    this.finalDetail['extremes'].forEach((score) => {
       const full_article = this.finalDetail['metadata'].find(full_article => full_article['sentiment']['document']['score'] === score)
+      console.log('found article', full_article)
+      full_article['bg'] =  this.convertScoreToIcon(full_article['sentiment']['document']['score'])
       if(full_article) {
         filteredMax.push(full_article)
       }
       })
-        console.log('love, ', {max:filteredMax, min:filteredMin})
+      filteredMax = this.shuffle(filteredMax)
+      console.log('love', filteredMax)
     return {max:filteredMax, min:filteredMin}
+  }
+
+   shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+  }
+
+ 
+  private _toggleSidebar() {
+    console.log(this._opened)
+    this._opened = !this._opened;
   }
 
   onSelectCountry() {
@@ -267,7 +271,8 @@ export class AppComponent {
     }, 13000);
     this.http.post(`${heroku}${this.userInput}`, null
     ).subscribe((res) => {
-      console.log('AU CALME', res)
+      console.log('AU CALME',       window.screen.height       )
+      this.dynamicHeigth = '600px'
       this.finalDetail = res
        this.filterEntities()
        this.epicArticles =  this.filterExtremes()

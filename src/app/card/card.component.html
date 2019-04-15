@@ -1,0 +1,35 @@
+<div id="new-york" class="card">
+		<div [className]="'card-header ' + bg">
+			<!-- INFO -->
+			<div class="left-side">
+			<h2 class="city">{{name}}</h2>
+			<span class="currently-weather">{{description}}</span>
+			<span [style.color]="color" [className]="'temperature'" >{{temperature}}</span>
+			</div>
+			<div class="weather-icon">
+				<!-- SUNNY -->
+				<img id='sunny' [src] = "icon"> 
+			</div>
+			<div class="header-bg" style="background-image: url(img/new-york.jpg)"></div>
+			<div class="clearfix"></div>
+		</div>
+		<!-- <div class="coming-weather">
+			<div class="col">
+				<span class="day">Max</span>
+				<div class="weather-icon">
+						<span  class="subTemperature">{{temperature}}</span>
+			
+				</div>
+			</div>
+			<div class="col">
+				
+				<span class="day">Min</span>
+				<div class="weather-icon">
+						<span class="subTemperature">{{temperature}}</span>
+					</div>
+			</div>
+			<div class="col">
+				</div>
+			<div class="clearfix"></div>
+		</div> -->
+	</div>
